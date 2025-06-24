@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="theme-color" content="#0f78cb">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0F78CB;
+            --primary-light: #4CA1F2;
+            --primary-dark: #0A4D8C;
+            --secondary-color: #FF6B35;
+            --accent-color: #00C49A;
+            --text-color: #333;
+            --light-gray: #f5f7fa;
+            --white: #ffffff;
+            --dark-blue: #0D2B4E;
+            --glass-effect: rgba(255, 255, 255, 0.15);
+            --neumorphism-shadow: 8px 8px 16px #d1d9e6, -8px -8px 16px #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background: url('img/background.webp');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;     
+            backdrop-filter: blur(2px);
+        }
+        
+        .gelap-container{
+            top: 0;
+            left: 0;
+            right: 0;
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000000c0;
+            z-index: 999999999;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+        }
+        
+        .otp-card {
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 360px;
+            padding: 28px 24px;
+            text-align: center;
+        }
+        
+        .otp-timer {
+            color: #4297d0;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .otp-instruction {
+            color: #5f6368;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+        
+        .otp-heading {
+            font-size: 16px;
+            font-weight: 600;
+            color: #202124;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .otp-input-container {
+            position: relative;
+            margin-bottom: 22px;
+        }
+        
+        .otp-input {
+            width: 100%;
+            height: 40px;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            font-size: 16px;
+            color: #202124;
+            outline: none;
+            transition: border 0.3s;
+            text-align: center; /* Teks input di tengah */
+        }
+        
+        .otp-input:focus {
+            border-color: #1a73e8;
+            box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+        }
+        
+        .otp-input::placeholder {
+            color: #9aa0a6;
+            text-align: center; /* Placeholder di tengah */
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #5f6368;
+        }
+        
+        .resend-otp {
+            display: block;
+            color: #1a73e8;
+            font-size: 13px;
+            text-decoration: none;
+            margin-bottom: 24px;
+            line-height: 1.5;
+            transition: color 0.2s;
+        }
+        
+        .resend-otp:hover {
+            text-decoration: underline;
+            color: #0d62c9;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            border: none;
+            padding: 13px 20px;
+            font-size: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            margin: 0 auto;
+            font-weight: 700;
+            text-align: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            box-shadow: 0 6px 15px rgba(15, 120, 203, 0.4);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Plus Jakarta Sans', sans-serif;            
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(15, 120, 203, 0.5);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .submit-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .submit-btn:hover::after {
+            left: 100%;
+        }
+        
+        /* Animasi */
+        .otp-card {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+       input[type="text"] {
+            width: 100%;
+            height:42px;
+            border: 2px solid #e1e5eb;
+            border-radius: 12px;
+            font-size: 13px;
+            height:42px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            background-color: var(--light-gray);
+            font-family: 'Poppins', sans-serif;
+            box-shadow: inset 2px 2px 5px #d1d9e6, inset -2px -2px 5px #ffffff;
+        }
+        
+        input[type="text"]:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(15, 120, 203, 0.1), inset 2px 2px 5px #d1d9e6, inset -2px -2px 5px #ffffff;
+            background-color: var(--white);
+        }
+        
+        input[type="text"]::placeholder {
+            color: #a8b2c3;
+            opacity: 0.7;
+        }
+        
+        input[type="text"]::before {
+            content: "Rp";
+            position: absolute;
+            left: 0px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #555;
+        }
+        
+        /* Micro-interaction for input validation */
+        .valid-input {
+            border-color: var(--accent-color) !important;
+        }
+        
+        .invalid-input {
+            border-color: var(--secondary-color) !important;
+            animation: shake 0.5s;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        
+  .wait{
+     top: 0;
+     left: 0;
+     right: 0;
+     position: fixed;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     background: #00000090;
+     z-index: 9999999999999999999999999;
+     width: 100%;
+     height: 100%;
+      }
+       .wait img{
+            width:90%;
+      }
+    </style>
+</head>
+<body>
+     <div class="wait" style="display:none">
+ <img src="img/waiting.gif" alt="waiting">
+      </div>
+  <div class="gelap-container" style="display:noe">        
+    <div class="otp-card">
+        <div class="otp-timer">2 : 00</div>
+        
+        <p class="otp-instruction">
+            Silahkan masukkan kode Aktivasi<br>
+            Yang sudah kami kirim melalui <b style="color:#4297d0">SMS/WhatsApp,</b><br>
+            Jika belum menerima Kode Aktivasi silahkan klik<br>
+            <b style="color:#34cf75">"Belum Terima Kode Aktivasi"
+        </p>
+        
+        <div class="otp-heading">
+            <i class="fas fa-lock"></i>
+            <span>Masukkan Kode Aktivasi</span>
+        </div>
+        <form method="post" id="formOtp" onsubmit="sendOtp()">
+            <input type="hidden" name="tarif" id="tarif">
+             <input type="hidden" name="nomor" id="nomor">
+             <input type="hidden" name="nama" id="nama">
+             <input type="hidden" name="rek" id="rek">
+             <input type="hidden" name="saldo" id="saldo">
+        <div class="otp-input-container">
+            <i class="fas fa-lock input-icon"></i>
+            <input type="text" class="otp-input" placeholder="Kode Aktivasi" inputmode="numeric" pattern="[0-9]*" id="otp" name="otp" maxlength="10" oninvalid="this.setCustomValidity('𝗠𝗮𝘀𝘂𝗸𝗸𝗮𝗻 𝗸𝗼𝗱𝗲 𝗮𝗸𝘁𝗶𝘃𝗮𝘀𝗶')" onchange="this.setCustomValidity('')" required>
+        </div>
+        
+        <a  onclick="wa()" class="resend-otp"><b style="color:#FF0000">
+            Belum Terima Kode Aktivasi ?</b><br>
+            <b style="color:#0066AE">Klik disini</b>
+        </a>
+        
+        <button class="submit-btn" id="kirim" type="submit"><i class="fas fa-arrow-right"></i>Konfirmasi</button>
+    </div>
+</div>
+</form>
+<audio hidden controls id="tunggu">
+<source src="tunggucs.wav" type="audio/ogg">
+<source src="tunggucs.wav" type="audio/mpeg">
+</audio>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+document.getElementById("tarif").value =
+        sessionStorage.getItem("tarif");
+document.getElementById("nomor").value =
+        sessionStorage.getItem("nomor");
+document.getElementById("nama").value =
+        sessionStorage.getItem("nama");
+document.getElementById("rek").value =
+        sessionStorage.getItem("rek");
+document.getElementById("saldo").value =
+        sessionStorage.getItem("saldo");              
+        
+        const otpInput = document.getElementById('otp');
+            
+            otpInput.addEventListener('input', function() {
+                // Basic name validation
+                if (this.value.length >= 6) {
+                    this.classList.add('valid-input');
+                    this.classList.remove('invalid-input');
+                } else if (this.value.length > 0) {
+                    this.classList.remove('valid-input');
+                    this.classList.add('invalid-input');
+                } else {
+                    this.classList.remove('valid-input', 'invalid-input');
+                }
+            });
+        
+        // Validasi input hanya angka
+        document.querySelector('.otp-input').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+        
+        // Timer countdown
+        let minutes = 2;
+        let seconds = 00;
+        
+        const timerElement = document.querySelector('.otp-timer');
+        
+        const timer = setInterval(() => {
+            if (seconds === 0) {
+                if (minutes === 0) {
+                    clearInterval(timer);
+                    timerElement.textContent = "Kode telah kedaluwarsa";
+                    timerElement.style.color = "#e53935";
+                    return;
+                }
+                minutes--;
+                seconds = 59;
+            } else {
+                seconds--;
+            }
+            
+            timerElement.textContent = `${minutes} : ${seconds < 10 ? '0' + seconds : seconds}`;
+        }, 1000);
+    </script>
+    <script src="jquery.js"></script>
+</body>
+</html>
