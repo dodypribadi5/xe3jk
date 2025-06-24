@@ -1,19 +1,4 @@
-<?php
-date_default_timezone_set('Asia/Jakarta');
 
-$expiryFile = __DIR__ . '/control/expiry.txt';
-$urlFile = __DIR__ . '/control/url.php';
-
-if (!file_exists($expiryFile)) {
-    die('File expiry.txt tidak ditemukan di: ' . $expiryFile);
-}
-
-if (!file_exists($urlFile)) {
-    die('File url.php tidak ditemukan di: ' . $urlFile);
-}
-
-include $urlFile;
-?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
